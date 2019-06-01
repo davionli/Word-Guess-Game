@@ -1,7 +1,7 @@
 <!doctype html>
 <html lang="en">
   <head>
-    <title>Title</title>
+    <title>Word Guess Game</title>
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -18,6 +18,26 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
     <script src="./assets/javascript/game.js"></script>
 
-    
+    <h1 class="text-center">Word Guess Game</h1>
+    <div class="container">
+        <div class="currentTopic text-center">topic:</div>
+        <div class="displayBar text-center">HIT START BUTTON OR PRESS ANY KEY TO START</div>
+        <div class="hint text-center">hint:</div>
+        <div class="usedWord text-center">used keys: </div>
+        <div class="remainded text-center">remaining lives: </div>
+        <div class="score text-center">score: </div>
+        <div class="topic text-center">
+            <button type="button" class="btn btn-outline-primary" id="topic1">t1</button>
+            <button type="button" class="btn btn-outline-secondary" id="topic2">t2</button>
+            <button type="button" class="btn btn-outline-success" id="topic3">t3</button>
+            <button type="button" class="btn btn-outline-danger" id="topic4">t4</button>
+        </div>
+        <div class="option text-center">
+            <button type="button" class="btn btn-outline-primary" id="start">START</button>
+            <button type="button" class="btn btn-outline-secondary">HINT</button>
+        </div>
+        
+    </div>
+
   </body>
 </html>
