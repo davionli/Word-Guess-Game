@@ -3,22 +3,23 @@
 
 //
 $(document).ready(function() {
-var letter = ["a","b","c","d","e","f","g","h","i","j","k","l","m","n","o","p","q","r","s","t","u","v","w","x","y","z"]
+var letter = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z"];
+
 var personPool = [
-    {name: "JackChen", occupation: "movie star", gender: "man", race: "asian"},
-    {name: "", occupation: "", gender: "", race: ""},
-    {name: "", occupation: "", gender: "", race: ""},
-    {name: "", occupation: "", gender: "", race: ""},
-    {name: "", occupation: "", gender: "", race: ""},
-    {name: "", occupation: "", gender: "", race: ""},
-    {name: "", occupation: "", gender: "", race: ""},
-    {name: "", occupation: "", gender: "", race: ""},
-    {name: "", occupation: "", gender: "", race: ""},
-    {name: "", occupation: "", gender: "", race: ""}
+    {name: "JACKCHEN", occupation: "movie star", gender: "man", nationality: "China"},
+    {name: "TAYLORSWIFT", occupation: "singer", gender: "woman", nationality: "USA"},
+    {name: "GEORGEWASHINGTON", occupation: "president", gender: "man", nationality: "USA"},
+    {name: "ELIZABETHII", occupation: "monarch", gender: "woman", nationality: "UK"},
+    {name: "NAPOLEON", occupation: "monarch", gender: "man", nationality: "France"},
+    {name: "OPRAHWINFREY", occupation: "talk show host", gender: "woman", nationality: "USA"},
+    {name: "MAOZEDONG", occupation: "revolutionary", nationality: "man", nationality: "asian"},
+    {name: "JOSEPHSTALIN", occupation: "president", gender: "man", nationality: "USSR"},
+    {name: "MICHAELJACKSON", occupation: "singer", gender: "man", nationality: "USA"},
+    {name: "ANGELAMERKEL", occupation: "president", gender: "woman", nationality: "Germany"}
 ]
 var animalPool = [
     {name: "", size: "", food: "", color: ""},
-    {name: "", size: "", food: "", color: ""},
+    {name: "FLAMINGO", size: "", food: "", color: ""},
     {name: "", size: "", food: "", color: ""},
     {name: "", size: "", food: "", color: ""},
     {name: "", size: "", food: "", color: ""},
@@ -29,7 +30,7 @@ var animalPool = [
     {name: "", size: "", food: "", color: ""},
 ]
 var game = {
-    pool: ["dog", "cat", "fish", "elephant", "panda"],
+    pool: ["DOG", "CAT", "FISH", "ELEPHANT", "PANDA"],
     secretWord: "",
     currentWord: "",
     usedKey: [],
@@ -46,8 +47,8 @@ var game = {
         // /\w/ means any alphabeta letter, g means globle
         return word.replace(/\w/g, "_ ");
     },
-    reset: function() {
-        this.secretWord = this.generateWord();
+    resetGame: function() {
+        this.secretWord = this.generateWord().toUpperCase();
         this.currentWord = this.secretWord;
         this.usedKey = [];
         this.wordDisplay = this.coverWithUderline(this.secretWord);
@@ -62,7 +63,7 @@ function replaceAt(str, index, replacement) {
     return str.substr(0, index) + replacement+ str.substr(index + replacement.length);
 }
 $("#start").on("click", function() {
-    game.reset();
+    game.resetGame();
     game.score = 0;
     game.startkey = true;
     $(".displayBar").html(game.wordDisplay);
@@ -73,17 +74,17 @@ $("#start").on("click", function() {
 
 document.onkeyup = function(e) {
     if (game.lastWordNumber === 0 ) {
-        game.reset();
+        game.resetGame();
     }
     if (game.currentLives === 0) {
-        game.reset();
+        game.resetGame();
     }
-    var currentKey = e.key
-    if (!game.usedKey.includes(currentKey)&&letter.includes(currentKey.toLocaleLowerCase()) && game.startkey) {
-        game.usedKey.push(currentKey.toLocaleLowerCase());
+    var currentKey = e.key.toUpperCase();
+    if (!game.usedKey.includes(currentKey)&&letter.includes(currentKey) && game.startkey) {
+        game.usedKey.push(currentKey);
         if (game.currentWord.indexOf(currentKey) === -1)
             game.currentLives--;
-        while (game.currentWord.indexOf(currentKey.toLocaleLowerCase()) != -1) {
+        while (game.currentWord.indexOf(currentKey) != -1) {
             game.wordDisplay = replaceAt(game.wordDisplay, game.currentWord.indexOf(currentKey)*2, currentKey);
             game.currentWord = replaceAt(game.currentWord, game.currentWord.indexOf(currentKey), "#");
             game.lastWordNumber--;
