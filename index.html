@@ -7,7 +7,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
     <!-- Bootstrap CSS -->
+    
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link href="https://fonts.googleapis.com/css?family=Anton|Indie+Flower&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="assets/css/style.css">
   </head>
   <body>
       
@@ -18,13 +21,13 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
     <script src="./assets/javascript/game.js"></script>
 
-    <h1 class="text-center">Word Guess Game</h1>
+    <h1 class="text-center">Word Guess Game!!</h1>
     <div class="container">
         <div class="row">
             <div class="col-md-6 border-right">
                 <div class="currentTopic text-center" id="topic">TOPIC: DEFAULT</div>
                 <div class="displayBar text-center">HIT START BUTTON OR PRESS ANY KEY TO START</div>
-                <div class="hint text-center">HINT:</div>
+                <div class="hint text-center" id="hintDisplay">HINT: COST 2 LIVES</div>
                 <div class="usedWord text-center">USED KEYS: </div>
                 <div class="remainded text-center">REMAINING LIVES: </div>
                 <div class="score text-center">SCORE: </div>
@@ -34,12 +37,12 @@
                 </div>
                 <div class="option text-center">
                     <button type="button" class="btn btn-danger" id="start">START</button>
-                    <button type="button" class="btn btn-primary">HINT</button>
+                    <button type="button" class="btn btn-primary" id="hint">HINT</button>
                 </div>
             </div>
-            <div class="col-md-6 border-left">
-                <div><img src="#" alt="" width="200" id="ansPic"></div>
-                <div><span id="answer">Answer</span></div>
+            <div class="col-md-6 border-left text-center">
+                <div><img src="#" alt="" width="400" id="ansPic"></div>
+                <div><span id="answer"></span></div>
             </div>
     </div>
 

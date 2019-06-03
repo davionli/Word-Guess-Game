@@ -4,7 +4,8 @@
 //
 $(document).ready(function() {
 var letter = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z"];
-
+var audioElement = document.createElement("audio");
+    audioElement.setAttribute("src", "assets/audio/cheer.mp3");
 var personPool = [
     {name: "JACKIECHEN", occupation: "movie star", gender: "man", nationality: "China", pic: "assets/images/jackiechen.jpg"},
     {name: "TAYLORSWIFT", occupation: "singer", gender: "woman", nationality: "USA", pic: "assets/images/taylorswift.jpg"},
@@ -30,19 +31,25 @@ var animalPool = [
     {name: "LOBSTER", feet: "many", food: "fish", live: "sea/ocean", pic: "assets/images/lobster.jpg"},
 ]
 var game = {
-    pool: [{name: "DOG", feet: "4", live: "land/indoor/wild", pic: ""}, {name: "CAT", feet: "4", live: "land/indoor/wild", pic: ""}, {name: "ELEPHANT", feet: "4", live: "land/wild", pic: ""}, {name: "PANDA", feet: "4", live: "land/wild", pic: ""}],
+    pool: [{name: "PANDA", feet: "4", food: "bamboo", live: "land/indoor/wild", pic: "assets/images/panda.jpg"}],
     secretWord: "",
     currentWord: "",
     usedKey: [],
     wordDisplay: " ",
     lastWordNumber: 0,
     currentLives: 0,
+    currentHint:"",
     score: 0,
     imgLink: "",
     startkey: false,
     generateWord: function() {
-        var index = Math.floor(Math.random() * this.pool.length);
+        var index = Math.floor(Math.random()*this.pool.length);
+        var hintIndex = Math.floor(Math.random()*3)+1;
+        var hintKey = Object.keys(this.pool[index]);
+        var hintValue = Object.values(this.pool[index]);
+        this.currentHint = hintKey[hintIndex] + "-" + hintValue[hintIndex];
         this.imgLink = this.pool[index].pic;
+
         return this.pool[index].name;
     },
     coverWithUderline: function (word) {
@@ -56,13 +63,11 @@ var game = {
         this.usedKey = [];
         this.wordDisplay = this.coverWithUderline(this.secretWord);
         this.lastWordNumber = this.currentWord.length;
-        this.currentLives = 8;
-        
+        this.currentLives = 8;       
         this.startkey = false;
     },
     showAnswer: function() {
         $("#answer").text("ANSWER: " + this.secretWord);
-        console.log(this.imgLink);
         $("#ansPic").attr("src", this.imgLink);
     }
 }
@@ -79,6 +84,12 @@ $("#topic2").on("click", function() {
     game.pool = animalPool;
     $("#topic").html("TOPIC: ANIMAL");
 })
+$("#hint").on("click", function() {
+    game.currentLives -= 2;
+    $("#hintDisplay").html("HINT: " + game.currentHint);
+    $(".remainded").html("REMAINING LIVES: "+game.currentLives);
+
+})
 
 
 $("#start").on("click", function() {
@@ -87,14 +98,17 @@ $("#start").on("click", function() {
     game.startkey = true;
     $(".displayBar").html(game.wordDisplay);
     $(".usedWord").html("USED KEYS: "+game.usedKey);
-    $(".remainded").html("REMAINING LIVES: "+game.currentLives);
+    $(".remainded").html("REMAINING LIVES: "+ game.currentLives);
     $(".score").html("SCORE: "+game.score);
 })
 
 document.onkeyup = function(e) {
+    // Reset game
     if (game.lastWordNumber === 0 ) {
         game.resetGame();
     }
+
+    // Run out of lives
     if (game.currentLives === 0) {
         game.resetGame();
         game.showAnswer();
@@ -110,8 +124,12 @@ document.onkeyup = function(e) {
             game.lastWordNumber--;
         }
     }
+    
+
+    // Guess Right, Congratuation!!
     if (game.lastWordNumber === 0) {
         game.showAnswer();
+        audioElement.play();
         game.score++;
     }
     game.startkey = true;
