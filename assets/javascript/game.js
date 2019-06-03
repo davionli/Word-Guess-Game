@@ -109,7 +109,7 @@ document.onkeyup = function(e) {
     }
 
     // Run out of lives
-    if (game.currentLives === 0) {
+    if (game.currentLives <= 0) {
         game.resetGame();
         game.showAnswer();
     }
