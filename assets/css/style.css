@@ -4,3 +4,8 @@ div {
 body {
     background-image: url("../images/floor-tile.png");
 }
+
+.container {
+    border: solid 3px #f3452f;
+    padding: 40px;
+}
