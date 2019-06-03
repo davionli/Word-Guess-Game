@@ -18,16 +18,16 @@ var personPool = [
     {name: "DAENERYSTARGARYEN", occupation: "queen", gender: "woman", nationality: "Seven Kingdoms", pic: "assets/images/deny.jpg"}
 ]
 var animalPool = [
-    {name: "", feet: "", food: "", live: ""},
-    {name: "FLAMINGO", feet: "2", food: "", live: ""},
-    {name: "", feet: "", food: "", live: ""},
-    {name: "", feet: "", food: "", live: ""},
-    {name: "", feet: "", food: "", live: ""},
-    {name: "", feet: "", food: "", live: ""},
-    {name: "", feet: "", food: "", live: ""},
-    {name: "", feet: "", food: "", live: ""},
-    {name: "", feet: "", food: "", live: ""},
-    {name: "", feet: "", food: "", live: ""},
+    {name: "RAVEN", feet: "2", food: "meat", live: "sky/land", pic: "assets/images/raven.jpg"},
+    {name: "FLAMINGO", feet: "2", food: "fish", live: "land/wild", pic: "assets/images/FLAMINGO.jpg"},
+    {name: "TURKEY", feet: "2", food: "grain", live: "land/wild/", pic: "assets/images/turkey.jpg"},
+    {name: "PENGUIN", feet: "2", food: "fish", live: "land/wild/ice field", pic: "assets/images/penguin.jpg"},
+    {name: "BEAVER", feet: "4", food: "fish/meat", live: "water/land", pic: "assets/images/beaver.jpg"},
+    {name: "RHINOCEROS", feet: "4", food: "meat", live: "land/wild", pic: "assets/images/RHINOCEROS.jpg"},
+    {name: "SHRIMP", feet: "many", food: "fish", live: "lake/sea", pic: "assets/images/shrimp.jpg"},
+    {name: "DOLPHIN", feet: "0", food: "meat", live: "sea/ocean", pic: "assets/images/dolphin.jpg"},
+    {name: "CHIMPANZEE", feet: "4", food: "meat", live: "land/jungle", pic: "assets/images/CHIMPANZEE.jpg"},
+    {name: "LOBSTER", feet: "many", food: "fish", live: "sea/ocean", pic: "assets/images/lobster.jpg"},
 ]
 var game = {
     pool: [{name: "DOG", feet: "4", live: "land/indoor/wild", pic: ""}, {name: "CAT", feet: "4", live: "land/indoor/wild", pic: ""}, {name: "ELEPHANT", feet: "4", live: "land/wild", pic: ""}, {name: "PANDA", feet: "4", live: "land/wild", pic: ""}],
@@ -75,6 +75,11 @@ $("#topic1").on("click", function() {
     game.pool = personPool;
     $("#topic").html("TOPIC: PERSON");
 })
+$("#topic2").on("click", function() {
+    game.pool = animalPool;
+    $("#topic").html("TOPIC: ANIMAL");
+})
+
 
 $("#start").on("click", function() {
     game.resetGame();
