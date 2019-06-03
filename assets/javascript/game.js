@@ -4,8 +4,10 @@
 //
 $(document).ready(function() {
 var letter = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z"];
-var audioElement = document.createElement("audio");
-    audioElement.setAttribute("src", "assets/audio/cheer.mp3");
+var winAudio = document.createElement("audio");
+    winAudio.setAttribute("src", "assets/audio/cheer.mp3");
+var loseAudio = document.createElement("audio");
+    loseAudio.setAttribute("src", "assets/audio/sad.mp3");
 var personPool = [
     {name: "JACKIECHEN", occupation: "movie star", gender: "man", nationality: "China", pic: "assets/images/jackiechen.jpg"},
     {name: "TAYLORSWIFT", occupation: "singer", gender: "woman", nationality: "USA", pic: "assets/images/taylorswift.jpg"},
@@ -65,6 +67,7 @@ var game = {
         this.lastWordNumber = this.currentWord.length;
         this.currentLives = 8;       
         this.startkey = false;
+        $("#hintDisplay").html("HINT: ");
     },
     showAnswer: function() {
         $("#answer").text("ANSWER: " + this.secretWord);
@@ -110,8 +113,9 @@ document.onkeyup = function(e) {
 
     // Run out of lives
     if (game.currentLives <= 0) {
-        game.resetGame();
         game.showAnswer();
+        loseAudio.play();
+        game.resetGame();
     }
     var currentKey = e.key.toUpperCase();
     if (!game.usedKey.includes(currentKey)&&letter.includes(currentKey) && game.startkey) {
@@ -129,7 +133,7 @@ document.onkeyup = function(e) {
     // Guess Right, Congratuation!!
     if (game.lastWordNumber === 0) {
         game.showAnswer();
-        audioElement.play();
+        winAudio.play();
         game.score++;
     }
     game.startkey = true;
